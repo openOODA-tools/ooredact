@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooredact-bin
+_pkgname=ooredact
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Real-time stream redactor masking API keys, JWTs, and private keys in logs."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooredact"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooredact')
+conflicts=('ooredact')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooredact-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooredact-linux-x86_64" "${pkgdir}/usr/bin/ooredact"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooredact-uninstall"
+}
